@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootst
+rap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class = "container">
+		<h2>Photo Website</h2>
+		<nav class="navbar navbar-default">
+		    <ul class="nav navbar-nav">
+		      <li><a href="index.html">Blackmails against me</a></li>
+		      <li class="active"><a href="#">Upload a blackmail</a></li>
+		      <li><a href="#">Contact Us</a></li>
+		      <li><a href="#">Log out</a></li>
+		    </ul>
+		</nav>
+
+		<form style = "border: 1px solid black; padding: 50px">
+			<div class="form-group">
+				<label for="user_select">Select user to blackmail:</label>
+				<select class="form-control" id="user_select" style = "max-width: 80px">
+					<option>user 1</option>
+					<option>user 2</option>
+					<option>user 3</option>
+				</select>
+			</div>
+
+			<div class = "form-group">
+				<label>Upload Image:</label>
+				<div style = "height:100px;width:100px;border: 1px solid black;margin: 10px 0px"></div>
+				<button style = "margin: 0px 10px;">Browse...</button>
+
+			</div>
+			<br><br>
+
+			<button type="submit" class = "btn btn-info">Submit</button>
+		</form>
+	</div>
+
+</body>
+</html>
