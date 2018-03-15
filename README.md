@@ -1,7 +1,7 @@
 # 473Blackmail
 
 
-Adding in the database ( can't find a cleaner way of doing this sorry D: )
+Adding in the database ( can't find a cleaner way of doing this sorry D: ), should only need to do this initially
 
 1. move the 'backend' folder out
 
