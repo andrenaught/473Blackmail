@@ -1,28 +1,29 @@
 # 473Blackmail
 
+IMPORTANT: don't use browser-sync, just put this address: http://localhost:2403/
 
 Adding in the database ( can't find a cleaner way of doing this sorry D: ), should only need to do this initially
 
-1. move the 'backend' folder out
+1. move the '473' outside the current directory
 ```
-mv 473Blackmail/backend/ .
+mv 473Blackmail/ ../
 ```
 
 2. create your own dpd
 ```
-cd 473Blackmail
-dpd create backend
+dpd create 473Blackmail
 ```
 
-3. Copy in the files from the 'backend' folder you moved out to your newly created 'backend' folder with dpd (this should include the .gitignore file)
+3. Copy in the files from the '473' folder you moved out to your newly created dpd '473' folder (this should include the .gitignore file)
 ```
-cp -r ../backend/ backend/
+cp -r ../473Blackmail/ 473Blackmail/
 ```
 
-4. Delete the 'backend' folder you moved out
+4. Delete the '473' folder you moved out
 ```
-rm -r ../backend/
+rm -r ../473Blackmail/
 ```
+
 
 Potential extra Features/Ideas (feel free to add stuff or start working on these, let us know if you are)
 1. Countdown Timer, do something when it ends (maybe make it public to everyone in the site)
