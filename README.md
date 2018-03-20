@@ -18,7 +18,7 @@ dpd create 473Blackmail
 cp -r ../473Blackmail/ 473Blackmail/
 ```
 
-4. Delete the 'backend' folder you moved out
+4. Delete the '473' folder you moved out
 ```
 rm -r ../473Blackmail/
 ```
