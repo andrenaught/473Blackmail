@@ -9,3 +9,4 @@ data/
 # other stuff
 app.dpd
 package-lock.json
+public/file_database

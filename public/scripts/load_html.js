@@ -36,6 +36,32 @@
     return true;
   }
 
+  //generate blackmail html elements
+  function blackmail_element (blackmail_arr) {
+    var my_blackmails = "[data-my-blackmails=\"div\"]";
+
+    for (var i = 0; i < blackmail_arr.length; i++) {
+
+      var $div = $("<div></div>");
+
+      var $info = $("<br><br><p></p>");
+      $info.append("To: " + blackmail_arr[i].to)
+
+      var $img = $("<img>", {
+        src: blackmail_arr[i].path,
+        height: 100,
+      });
+
+
+      $div.append($info);
+      $div.append($img);
+      $(my_blackmails).append($div);
+      
+    }
+ 
+  }
+
+
   // hide/show particular html based on whether user is logged in or not
   function load_html(logged_in_user) {
 
@@ -53,6 +79,7 @@
   }
 
   //run it
+  App.LoggedInUser.get_my_blackmails(blackmail_element);
   App.LoggedInUser.get(load_html);
   window.App = App;
 })(window);
