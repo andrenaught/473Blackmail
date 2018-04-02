@@ -24,6 +24,11 @@ cp -r ../473Blackmail/ 473Blackmail/
 rm -r ../473Blackmail/
 ```
 
+5. Add in dpd-fileupload
+```
+cd 473Blackmail
+npm install dpd-fileupload --save
+```
 
 Potential extra Features/Ideas (feel free to add stuff or start working on these, let us know if you are)
 1. Countdown Timer, do something when it ends (maybe make it public to everyone in the site)
