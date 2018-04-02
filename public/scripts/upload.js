@@ -12,7 +12,7 @@ var uploadFiles = function() {
   var user_to_blackmail = $('#user_to_blackmail').val();
   var blackmailer = App.LoggedInUser.username;
   var uploadFile = new XMLHttpRequest();
-  uploadFile.open('POST', '/blackmail-images?subdir=' + blackmailer + ' to ' + user_to_blackmail);
+  uploadFile.open('POST', '/blackmailimgs?subdir=' + blackmailer + ' to ' + user_to_blackmail);
   uploadFile.send(fd);
   if (uploadFile.status < 300) {
     console.log('Successful Upload');

@@ -53,7 +53,7 @@
 
     var get_logged_in = this.get;
 
-    $.get("http://localhost:2403/blackmail-images/").then(function(result) {
+    $.get("http://localhost:2403/blackmailimgs/").then(function(result) {
       get_logged_in(function(user) {
 
         //add the blackmails that matches the id to an array
@@ -67,9 +67,12 @@
             }
 
             var from_and_to = element.subdir.split(" to ");
-            var blackmail = {uploaderId: element.uploaderId, from: from_and_to[0], to: from_and_to[1], path: file_path};
+            var blackmail = {id: element.id, uploaderId: element.uploaderId, from: from_and_to[0], to: from_and_to[1], path: file_path};
+
 
             my_blackmails.push(blackmail);
+
+            
           }
         });
 
@@ -79,15 +82,23 @@
     });
   }
 
-  LoggedInUser.prototype.delete_blackmail = function (id) {
+  LoggedInUser.prototype.delete_blackmail = function (id, element) {
 
-    dpd.fileupload.del(id, function(result, err) {
+    console.log(id);
+    dpd.blackmailimgs.del(id, function(result, err) {
         if (err) {
           alert(err);
         }
-        console.log(result);
+        else
+        {
+          console.log(result);
+          window.location.reload(); //refresh page
+        }
+        
+
     });
   }
+
   //run it
   App.LoggedInUser = new LoggedInUser();
   App.LoggedInUser.get(App.LoggedInUser.set_info.bind(App.LoggedInUser));

@@ -40,26 +40,39 @@
   function blackmail_element (blackmail_arr) {
     var my_blackmails = "[data-my-blackmails=\"div\"]";
 
-    for (var i = 0; i < blackmail_arr.length; i++) {
 
-      var $div = $("<div></div>");
+    if ($(my_blackmails).length !== 0)
+    { 
+        for (var i = 0; i < blackmail_arr.length; i++) {
 
-      var $info = $("<br><br><p></p>");
-      $info.append("To: " + blackmail_arr[i].to)
+        var $div = $("<div></div>");
 
-      var $img = $("<img>", {
-        src: blackmail_arr[i].path,
-        height: 100,
-      });
+        var $info = $("<br><br><p class='blackmail_info'></p>");
+        $info.append("<span>To: " + blackmail_arr[i].to + "</span>")
 
+        var $img = $("<img>", {
+          src: blackmail_arr[i].path,
+          height: 100,
+        });
 
-      $div.append($info);
-      $div.append($img);
-      $(my_blackmails).append($div);
-      
+        console.log(blackmail_arr[i].path);
+        var delete_func = "onclick='App.LoggedInUser.delete_blackmail(\"" + blackmail_arr[i].id + "\")'"; 
+        var $delete_button = $("<button class='btn btn-info' " + delete_func + ">delete</button>", {
+
+        });
+
+        $info.append($delete_button);
+        $div.append($info);
+        $div.append($img);
+        $(my_blackmails).append($div);
+        
+      }
     }
  
-  }
+  } 
+
+
+
 
 
   // hide/show particular html based on whether user is logged in or not
