@@ -49,7 +49,7 @@
 
 
   //return an array of file paths to the images
-  LoggedInUser.prototype.get_my_blackmails = function(callback) {
+  LoggedInUser.prototype.get_my_blackmails = function(callback, element_container) {
 
     var get_logged_in = this.get;
 
@@ -67,35 +67,78 @@
             }
 
             var from_and_to = element.subdir.split(" to ");
-            var blackmail = {id: element.id, uploaderId: element.uploaderId, from: from_and_to[0], to: from_and_to[1], path: file_path};
+            var blackmail = {
+              id: element.id,
+              uploaderId: element.uploaderId,
+              from: from_and_to[0],
+              to: from_and_to[1],
+              path: file_path
+            };
 
 
             my_blackmails.push(blackmail);
 
-            
+
           }
         });
 
         //put that array in the callback function
-        callback(my_blackmails);
+        callback(my_blackmails, element_container);
       });
     });
   }
 
-  LoggedInUser.prototype.delete_blackmail = function (id, element) {
 
-    console.log(id);
+  LoggedInUser.prototype.get_blackmails_tome = function(callback, element_container) {
+
+    var get_logged_in = this.get;
+
+    $.get("http://localhost:2403/blackmailimgs/").then(function(result) {
+      get_logged_in(function(user) {
+
+        //add the blackmails that matches the id to an array
+        var blackmails_tome = [];
+        result.forEach(function(element) {
+          var from_and_to = element.subdir.split(" to ");
+
+          console.log(user.username + " == " + from_and_to[1]);
+
+          if (user.username == from_and_to[1]) {
+            if (element.subdir != "") {
+              var file_path = "file_database/blackmails/" + element.subdir + "/" + element.filename;
+            } else {
+              var file_path = "file_database/blackmails/" + element.filename;
+            }
+
+            var from_and_to = element.subdir.split(" to ");
+            var blackmail = {
+              id: element.id,
+              uploaderId: element.uploaderId,
+              from: from_and_to[0],
+              to: from_and_to[1],
+              path: file_path
+            };
+
+            blackmails_tome.push(blackmail);
+          }
+        });
+
+        //put that array in the callback function
+        callback(blackmails_tome, element_container);
+      });
+    });
+  }
+
+
+  LoggedInUser.prototype.delete_blackmail = function(id, element) {
+
     dpd.blackmailimgs.del(id, function(result, err) {
-        if (err) {
-          alert(err);
-        }
-        else
-        {
-          console.log(result);
-          window.location.reload(); //refresh page
-        }
-        
-
+      if (err) {
+        alert(err);
+      } else {
+        console.log(result);
+        window.location.reload(); //refresh page
+      }
     });
   }
 

@@ -7,7 +7,7 @@ $('.alert-success').hide();
 var uploadFiles = function() {
   var fd = new FormData()
   for (var i in files) {
-      fd.append("uploadedFile", files[i])
+    fd.append("uploadedFile", files[i])
   }
   var user_to_blackmail = $('#user_to_blackmail').val();
   var blackmailer = App.LoggedInUser.username;
@@ -21,49 +21,89 @@ var uploadFiles = function() {
     console.log('failed to upload');
     alert('Failed to upload file');
   }
+
+
+
+
+  //var file_info = setFiles($("#exampleInputFile"));
+
+  //get image ID then create a 'blackmails' row to put the data (ex. list of demands) about the image
+  files.forEach(function(file) {
+    var query = "http://localhost:2403/blackmailimgs?subdir=" + blackmailer + " to " + user_to_blackmail + "&originalFilename=" + file.name;
+    $.get(query).then(function(result) {
+
+      //we want to get the one we just uploaded
+      var most_recent = result.pop();
+
+      //setup the data and post
+      var list_of_demands = [];
+      $('.demand').each(function() {
+        list_of_demands.push($(this).val())
+      });
+
+      // console.log(blackmailer);
+      data = {
+        demands: list_of_demands,
+        imgID: most_recent.id,
+        name: most_recent.originalFilename,
+        to: user_to_blackmail,
+        from: blackmailer
+      };
+
+      console.log(data);
+      $.post("http://localhost:2403/blackmails", data, function(serverResponse) {
+        console.log(serverResponse);
+      });
+
+    });
+  });
+
 };
 
 var setFiles = function(element) {
+
   console.log('File Properties:', element.files);
-    files = [];
-    for (var i = 0; i < element.files.length; i++) {
-      files.push(element.files[i]);
-    }
+  files = [];
+  for (var i = 0; i < element.files.length; i++) {
+    files.push(element.files[i]);
+  }
+
 };
 
 
-  function submitHandler(fn) {
+function submitHandler(fn) {
 
-    var upload_form = "[data-upload-image=\"form\"]";
-    $(upload_form).on("submit", function(event) {
-      event.preventDefault();
+  var upload_form = "[data-upload-image=\"form\"]";
+  $(upload_form).on("submit", function(event) {
+    event.preventDefault();
 
-      var data = {};
-      $(this).serializeArray().forEach(function(item) {
-        data[item.name] = item.value;
-      });
-
-      fn(data);
-
-      window.location.href = "user_page.html";
+    var data = {};
+    $(this).serializeArray().forEach(function(item) {
+      data[item.name] = item.value;
     });
-  }
 
-  function create_options (users) {
+    fn(data);
 
-    var user_selector = "[data-user-select=\"input\"]";
-    users.forEach(function (user) {
+    window.location.href = "user_page.html";
+  });
+}
 
-      //if (user.username != App.LoggedInUser.username)
-      console.log(App.LoggedInUser.username);
-      var $option = $("<option></option>", {
-        value: user.username
-      });
+function create_options(users) {
 
-      $option.append(user.username);
-      $(user_selector).append($option)
+  var user_selector = "[data-user-select=\"input\"]";
+  users.forEach(function(user) {
+
+    //if (user.username != App.LoggedInUser.username)
+    console.log(App.LoggedInUser.username);
+    var $option = $("<option></option>", {
+      value: user.username
     });
-  }
+
+    $option.append(user.username);
+    $(user_selector).append($option)
+  });
+}
+
 
 (function(window) {
   "use strict";
