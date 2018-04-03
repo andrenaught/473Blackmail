@@ -14,7 +14,7 @@ var uploadFiles = function() {
   var uploadFile = new XMLHttpRequest();
   uploadFile.open('POST', '/blackmailimgs?subdir=' + blackmailer + ' to ' + user_to_blackmail);
   uploadFile.send(fd);
-  if (uploadFile.status == 200) {
+  if (uploadFile.status < 300) {
     console.log('Successful Upload');
     alert('Success!');
   } else {
