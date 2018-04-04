@@ -71,7 +71,7 @@ var uploadFiles = function() {
 
 };
 
-/* currently not using this
+
 var setFiles = function(element) {
 
   console.log("File Properties:", element.files);
@@ -80,7 +80,7 @@ var setFiles = function(element) {
     files.push(element.files[i]);
   }
 
-};*/
+};
 
 
 function submitHandler(fn) {
