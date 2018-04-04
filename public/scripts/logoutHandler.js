@@ -26,7 +26,7 @@
         window.location.href = "login.html";
       });
     });
-  }
+  };
 
   //run it
   App.LogoutHandler = new LogoutHandler(login_form);

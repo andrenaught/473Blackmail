@@ -17,8 +17,6 @@
     }
   }
 
-
-
   //Pressed submit on the form
   LoginHandler.prototype.addSubmitHandler = function() {
 
@@ -38,7 +36,7 @@
       //attempt to login with the input data
       login_attempt(data);
     });
-  }
+  };
 
   //attempt to login user, 'data' is the credentials used
   LoginHandler.prototype.login_attempt = function(data) {

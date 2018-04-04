@@ -30,7 +30,7 @@
     });
 
 
-  }
+  };
 
   registrationHandler.prototype.sendData = function(data) {
     var unique_user = true;
@@ -52,7 +52,7 @@
       }
 
     });
-  }
+  };
 
 
 

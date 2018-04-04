@@ -34,18 +34,18 @@
       }
 
     });
-  }
+  };
 
   LoggedInUser.prototype.show_info = function() {
     this.get(function(user) {
       console.log(user);
     });
-  }
+  };
 
   LoggedInUser.prototype.set_info = function(user_info) {
     this.has_loaded = true;
     this.username = user_info.username;
-  }
+  };
 
 
   //return an array of file paths to the images
@@ -61,7 +61,7 @@
         result.forEach(function(element) {
           var from_and_to = element.subdir.split(" to ");
 
-         // console.log (from_and_to[0]);
+          // console.log (from_and_to[0]);
 
           if (user.username == from_and_to[0]) {
             if (element.subdir != "") {
@@ -70,7 +70,7 @@
               var file_path = "file_database/blackmails/" + element.filename;
             }
 
-            
+
             var blackmail = {
               id: element.id,
               from: from_and_to[0],
@@ -83,14 +83,14 @@
 
 
           }
-          console.log(user.username +  " == " + from_and_to[0]);
+          console.log(user.username + " == " + from_and_to[0]);
         });
 
         //put that array in the callback function
         callback(my_blackmails, element_container);
       });
     });
-  }
+  };
 
 
   LoggedInUser.prototype.get_blackmails_tome = function(callback, element_container) {
@@ -131,7 +131,7 @@
         callback(blackmails_tome, element_container);
       });
     });
-  }
+  };
 
 
   LoggedInUser.prototype.delete_blackmail = function(id, element) {
@@ -144,11 +144,11 @@
         window.location.reload(); //refresh page
       }
     });
-  }
+  };
 
   LoggedInUser.prototype.make_public = function(id, element) {
-   // post
-  }
+    // post
+  };
 
   //run it
   App.LoggedInUser = new LoggedInUser();
