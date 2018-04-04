@@ -12,13 +12,22 @@ var uploadFiles = function() {
   var user_to_blackmail = $('#user_to_blackmail').val();
   var blackmailer = App.LoggedInUser.username;
   var uploadFile = new XMLHttpRequest();
+  
+  var fileValidation = this.files[0];
+  var fileType = fileValidation["type"];
+  var validExtensions = ["image/gif", "image/jpeg", "image/png"];
+  
   uploadFile.open('POST', '/blackmailimgs?subdir=' + blackmailer + ' to ' + user_to_blackmail);
   uploadFile.send(fd);
-  if (uploadFile.status < 300) {
+  if (uploadFile.status < 300 && $.inArray(fileType, validExtensions) >= 0) {
     console.log('Successful Upload');
-    alert('Success!');
-  } else {
-    console.log('failed to upload');
+    alert('Successful Upload');
+  } else if ($.inArray(fileType, validExtensions) < 0) {
+      console.log('failed to upload, invalid file type');
+      alert('Failed to upload file due to invalid file type. Please only upload .gif, .jpg, or .png');
+  }
+  else {
+    console.log('Failed to upload');
     alert('Failed to upload file');
   }
 
