@@ -34,7 +34,6 @@ var uploadFiles = function() {
     return;
   }
 
-  setFiles($("#exampleInputFile"));
 
   //get image ID then create a "blackmails" row to put the data (ex. list of demands) about the image
   files.forEach(function(file) {
@@ -72,7 +71,7 @@ var uploadFiles = function() {
 
 };
 
-
+/* currently not using this
 var setFiles = function(element) {
 
   console.log("File Properties:", element.files);
@@ -81,7 +80,7 @@ var setFiles = function(element) {
     files.push(element.files[i]);
   }
 
-};
+};*/
 
 
 function submitHandler(fn) {
