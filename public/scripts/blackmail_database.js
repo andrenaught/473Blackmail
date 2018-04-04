@@ -4,40 +4,38 @@
   var $ = window.jQuery;
 
 
-  var get_all_blackmails = function(callback, element_container) {
-    $.get("http://localhost:2403/blackmailimgs/").then(function(result) {
+  var get_public_blackmails = function(callback, element_container) {
 
-      //add the blackmails that matches the id to an array
-      var my_blackmails = [];
+    $.get("http://localhost:2403/blackmails/").then(function(result) {
+      
 
-
+      var public_blackmails = [];
       result.forEach(function(element) {
 
-        if (element.subdir != "") {
-          var file_path = "file_database/blackmails/" + element.subdir + "/" + element.filename;
-        } else {
-          var file_path = "file_database/blackmails/" + element.filename;
-        }
+        //add the blackmails that are public
+        if (element.public == 1) {
+          var blackmail = {
+            id: element.id,
+            img_id: element.imgID,
+            from: element.from,
+            to: element.to,
+            name: element.name,
+            public: element.public,
+            demands: element.demands,
+            file_name: element.filename,
+          };
 
-        var from_and_to = element.subdir.split(" to ");
-        var blackmail = {
-          id: element.id,
-          from: from_and_to[0],
-          to: from_and_to[1],
-          path: file_path
-        };
-        my_blackmails.push(blackmail);
+          console.log(element.filename);
+          public_blackmails.push(blackmail);
+        }
       });
 
-
       //put that array in the callback function
-      callback(my_blackmails, element_container);
-
-
+      callback(public_blackmails, element_container);
     });
 
   };
 
-  App.get_all_blackmails = get_all_blackmails;
+  App.get_public_blackmails = get_public_blackmails;
   window.App = App;
 })(window);

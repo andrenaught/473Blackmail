@@ -62,5 +62,32 @@
 .break-word {
 	width: 20em;
 	overflow-wrap: break-word;
+	padding-top: 20px;
+	padding-left: 10px;
   }
 
+.blackmail_presenter
+{
+	background:#eee;
+	height: 500px;
+	margin-right:0px;
+	margin-left:0px;
+	box-shadow: 0px 2px 15px 3px #eee;
+}
+
+.blackmail_presenter .col-xs-8 
+{
+	border-right: 1px solid #fff;
+}
+
+.blackmail_presenter .col-xs-8 img
+{
+	max-width: 720px;
+	margin-top: 25px;
+	margin-left: 5px;
+	margin-bottom: 25px;
+}
+
+.blackmail_presenter .col-xs-4 {
+	min-height: 350px;
+}

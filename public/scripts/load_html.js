@@ -189,8 +189,7 @@
     App.LoggedInUser.get_blackmails_tome(blackmail_element, blackmails_tome);
   }
   if ($(public_blackmails).length !== 0) {
-    App.get_all_blackmails(blackmail_element, public_blackmails);
-    console.log("sfsf");
+    App.get_public_blackmails(blackmail_element, public_blackmails);
   }
   App.LoggedInUser.get(load_html);
   window.App = App;
