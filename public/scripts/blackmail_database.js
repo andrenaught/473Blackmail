@@ -7,7 +7,7 @@
   var get_public_blackmails = function(callback, element_container) {
 
     $.get("http://localhost:2403/blackmails/").then(function(result) {
-      
+
 
       var public_blackmails = [];
       result.forEach(function(element) {

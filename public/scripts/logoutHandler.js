@@ -21,7 +21,8 @@
     this.$formElement.on("click", function(event) {
       event.preventDefault();
 
-      dpd.users.logout(function(result, error) {
+      /*eslint no-undef: "off"*/
+      dpd.users.logout(function() {
         //redirect user to login page
         window.location.href = "login.html";
       });

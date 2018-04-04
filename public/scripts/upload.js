@@ -1,5 +1,6 @@
 var files = [];
-
+var App = window.App || {};
+var $ = window.jQuery;
 $(".alert-success").hide();
 
 
@@ -12,12 +13,11 @@ var uploadFiles = function() {
   var user_to_blackmail = $("#user_to_blackmail").val();
   var blackmailer = App.LoggedInUser.username;
   var uploadFile = new XMLHttpRequest();
-  
+
   var fileValidation = this.files[0];
-  var fileType = fileValidation["type"]
+  var fileType = fileValidation["type"];
   var validType = ["image/gif", "image/jpeg", "image/png"];
-  if ($.inArray(fileType, validType) >= 0)
-  {
+  if ($.inArray(fileType, validType) >= 0) {
     uploadFile.open("POST", "/blackmailimgs?subdir=" + blackmailer + " to " + user_to_blackmail);
     uploadFile.send(fd);
     if (uploadFile.status < 300) {
@@ -28,10 +28,9 @@ var uploadFiles = function() {
       alert("Failed to upload file");
       return;
     }
-  }
-  else {
-    console.log("Failed to upload, invalid file type")
-    alert("Failed to upload file due to invalid file type. Please only upload files w/ .gif, .jpg, or .png")
+  } else {
+    console.log("Failed to upload, invalid file type");
+    alert("Failed to upload file due to invalid file type. Please only upload files w/ .gif, .jpg, or .png");
     return;
   }
 
@@ -49,11 +48,11 @@ var uploadFiles = function() {
       //setup the data and post
       var list_of_demands = [];
       $(".demand").each(function() {
-        list_of_demands.push($(this).val())
+        list_of_demands.push($(this).val());
       });
 
       // console.log(blackmailer);
-      data = {
+      var data = {
         demands: list_of_demands,
         imgID: most_recent.id,
         name: most_recent.originalFilename,
@@ -73,6 +72,7 @@ var uploadFiles = function() {
 
 };
 
+/* currently not in use
 var setFiles = function(element) {
 
   console.log("File Properties:", element.files);
@@ -82,7 +82,7 @@ var setFiles = function(element) {
   }
 
 };
-
+*/
 
 function submitHandler(fn) {
 
@@ -121,7 +121,6 @@ function create_options(users) {
 (function(window) {
   "use strict";
   var App = window.App || {};
-  var $ = window.jQuery;
 
   //run it
   App.Users.getOthers(create_options);

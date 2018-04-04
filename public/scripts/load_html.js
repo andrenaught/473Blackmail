@@ -49,7 +49,7 @@
     $(img_element).attr("src", img_path);
 
     //scroll to that element
-    $('html, body').animate({
+    $("html, body").animate({
       scrollTop: $(presented_blackmail).offset().top
     }, 500);
 
@@ -99,24 +99,15 @@
   function blackmail_element(blackmail_arr, element_container) {
     console.log(blackmail_arr);
 
-    var displayed_img = "[data-displayed-img=\"img\"]";
-
+    var can_delete = false;
     if (element_container == "[data-my-blackmails=\"div\"]") {
-      var can_delete = true;
-      var can_publicize = true;
-    } else {
-      var can_delete = false;
-      var can_publicize = false;
+      can_delete = true;
     }
 
-    console.log(JSON.stringify(blackmail_arr.length));
     if ($(element_container).length !== 0) {
       for (var i = 0; i < blackmail_arr.length; i++) {
 
-
-        console.log(blackmail_arr[i].file_name);
         var file_path = "file_database/blackmails/" + blackmail_arr[i].from + " to " + blackmail_arr[i].to + "/" + blackmail_arr[i].file_name;
-        console.log(file_path);
         var $div = $("<div></div>");
 
         var $info = $("<br><br><div class='blackmail_info'></div>");
@@ -132,17 +123,13 @@
         var $show_button = $("<button class='btn btn-info'" + show_func + ">Show</button>");
         $info.append($show_button);
 
-        var demand_list = "[data-demand-list=\"ul\"]";
-
-
         //only allow to make it public if it hasnt been publicized yet
         if (can_delete && blackmail_arr[i].public == 0) {
           var publicize_func = "onclick='App.LoggedInUser.make_public(\"" + blackmail_arr[i].id + "\")'";
           var $publicize_button = ("<button class='btn btn-warning' " + publicize_func + ">make it public</button>");
 
           $info.append($publicize_button);
-        }
-        else if (blackmail_arr[i].public == 1){ 
+        } else if (blackmail_arr[i].public == 1) {
           $info.append("this is now public");
         }
 

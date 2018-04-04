@@ -18,6 +18,7 @@
 
     //check if there's someone logged in
     //this waits for response from server before running, but javascript after this won't
+    /*eslint no-undef: "off"*/
     dpd.users.me(function(result, error) {
 
       //this never seems to happen
@@ -88,7 +89,7 @@
     var get_logged_in = this.get;
 
     $.get("http://localhost:2403/blackmails/").then(function(result) {
-      
+
       get_logged_in(function(user) {
 
         var blackmails_tome = [];
@@ -128,7 +129,7 @@
         console.log(result);
         window.location.reload(); //refresh page
       }
-    }).then(function (){
+    }).then(function() {
       $.ajax("http://localhost:2403/blackmails/" + blackmail_id, {
         type: "DELETE"
       });
@@ -137,14 +138,16 @@
 
 
   LoggedInUser.prototype.make_public = function(id) {
-   var update_query = "http://localhost:2403/blackmails/" + id;
-   var data = {public: 1};
+    var update_query = "http://localhost:2403/blackmails/" + id;
+    var data = {
+      public: 1
+    };
 
-   $.post(update_query, data, function(serverResponse) {
-    console.log(serverResponse);
-    window.location.reload();
-   });
-  }
+    $.post(update_query, data, function(serverResponse) {
+      console.log(serverResponse);
+      window.location.reload();
+    });
+  };
 
 
   //run it

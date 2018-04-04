@@ -42,6 +42,7 @@
   LoginHandler.prototype.login_attempt = function(data) {
 
     //ask dpd database if user is valid
+    /*eslint no-undef: "off"*/
     dpd.users.login({
       username: data.username,
       password: data.password
@@ -60,7 +61,7 @@
         }
       }
     });
-  }
+  };
 
   //run the login handler
   App.loginHandler = new LoginHandler(login_form);

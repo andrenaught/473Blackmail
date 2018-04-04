@@ -46,7 +46,7 @@
 
       // if unique username + email, register the user and log em in
       if (unique_user) {
-        $.post(serverUrl, data, function(serverResponse) {
+        $.post(serverUrl, data, function() {
           App.loginHandler.login_attempt(data);
         });
       }
