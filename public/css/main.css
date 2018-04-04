@@ -91,3 +91,8 @@
 .blackmail_presenter .col-xs-4 {
 	min-height: 350px;
 }
+
+.upload_form 
+{
+	border: 1px solid black; padding: 50px;
+}
