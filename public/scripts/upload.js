@@ -12,18 +12,28 @@ var uploadFiles = function() {
   var user_to_blackmail = $("#user_to_blackmail").val();
   var blackmailer = App.LoggedInUser.username;
   var uploadFile = new XMLHttpRequest();
-  uploadFile.open("POST", "/blackmailimgs?subdir=" + blackmailer + " to " + user_to_blackmail);
-  uploadFile.send(fd);
-  if (uploadFile.status < 300) {
-    console.log("Successful Upload");
-    alert("Success!");
-  } else {
-    console.log("failed to upload");
-    alert("Failed to upload file");
+  
+  var fileValidation = this.files[0];
+  var fileType = fileValidation["type"]
+  var validType = ["image/gif", "image/jpeg", "image/png"];
+  if ($.inArray(fileType, validType) >= 0)
+  {
+    uploadFile.open("POST", "/blackmailimgs?subdir=" + blackmailer + " to " + user_to_blackmail);
+    uploadFile.send(fd);
+    if (uploadFile.status < 300) {
+      console.log("Successful Upload");
+      alert("Success!");
+    } else {
+      console.log("failed to upload");
+      alert("Failed to upload file");
+      return;
+    }
   }
-
-
-
+  else {
+    console.log("Failed to upload, invalid file type")
+    alert("Failed to upload file due to invalid file type. Please only upload files w/ .gif, .jpg, or .png")
+    return;
+  }
 
   //var file_info = setFiles($("#exampleInputFile"));
 
