@@ -7,3 +7,37 @@
 {
 	padding: 10px;
 }
+
+.contactpage
+{
+	margin-top: 80px;
+
+}
+
+.contactpage h2
+{
+	text-align:center;
+}
+
+.flex_container_contactpage
+{
+	display:flex;
+	justify-content: center;
+}
+.flex_element
+{
+	background:#eee;
+	 margin:10px 5px;
+	 padding: 20px 10px 10px 10px;
+}	
+
+.flex_element p
+{
+	text-align: center;
+	font-size: 20px;
+}
+
+.flex_element a
+{
+	text-decoration: none;
+}

@@ -12,7 +12,7 @@ rap/3.3.6/css/bootstrap.min.css">
 <body data-body="div" data-page="user_only" hidden>
 
 	<div class="container">
-		<h2>Photo Website</h2>
+		<h2>Blackmail Website</h2>
 
 		<!--NAV BAR (if logged in)-->
 		<nav class="navbar navbar-default" data-navbar-loggedin="div" hidden>
@@ -21,6 +21,7 @@ rap/3.3.6/css/bootstrap.min.css">
 					<li><a href="index.html">Home</a></li>
 					<li class="active"><a href="blackmails_to_me.html">Blackmails against me</a></li>
 					<li><a href="upload.html">Upload a blackmail</a></li>
+					<li><a href="public_blackmails.html">Public Blackmails</a></li>
 					<li><a href="contact.html">Contact Us</a></li>
 				</ul>
 
@@ -31,53 +32,30 @@ rap/3.3.6/css/bootstrap.min.css">
 			</div>
 		</nav>
 
-		<div style="background:#eee; height: 500px;padding-top:75px; padding-left:100px">
-			<img src="" data-displayed-img="img" height="350">
+		<div style="background:#eee; height: 500px;padding-top:75px; padding-left:100px" data-presented-blackmail="div">
 
-			<div>asd</div>
+			<div class="row">
+				<div class="col-xs-8">
+					<img src="" data-displayed-img="img" height="350">
+
+				</div>
+				<div class="col-xs-4" style="border-left: 1px solid black; padding-left: 50px; min-height: 350px" data-blackmail-info="div" hidden>
+					<h4 data-blackmail-title="h2"></h4>
+					<br>
+
+					<div data-blackmail-from="span"> </div>
+
+
+					<h4>List of Demands</h4>
+					<ul data-demand-list="ul">
+					</ul>
+				</div>
+			</div>
+
 		</div>
 
+		<h2>blackmails towards me</h2>
 		<div data-blackmails-tome="div">
-
-		</div>
-
-		<div class="row" data-page="selected_blackmail" hidden>
-			<div class="photo_spot col-xs-8">
-				<h4>Photo Title</h4>
-				<img src="img/pic1.jpg" style="max-height: 500px;">
-			</div>
-			<br><br>
-			<div class="col-xs-4" style="border-left: 1px solid black; padding-left: 50px; min-height: 500px">
-
-				<h4>Uploader Info</h4>
-				<p>username: user1</p>
-				<p>email: email1</p>
-
-				<br><br><br>
-				<h4>List of Demands</h4>
-				<ul>
-					<li>Demand 1</li>
-					<li>Demand 2</li>
-				</ul>
-			</div>
-		</div>
-
-		<br><br><br>
-		<div class="row">
-			<h2 style="text-align:center">More blackmails against you</h2>
-			<div class="col-xs-4">
-				<button>Sloth 1</button>
-				<img src="img/pic1.jpg" style="max-width: 100%;">
-			</div>
-			<div class="col-xs-4">
-				<button>Sloth 1</button>
-				<img src="img/pic1.jpg" style="max-width: 100%;">
-			</div>
-			<div class="col-xs-4">
-				<button>Sloth 1</button>
-				<img src="img/pic1.jpg" style="max-width: 100%;">
-			</div>
-
 
 		</div>
 

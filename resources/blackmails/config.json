@@ -40,6 +40,14 @@
 			"required": true,
 			"id": "from",
 			"order": 4
+		},
+		"public": {
+			"name": "public",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "public",
+			"order": 5
 		}
 	}
 }

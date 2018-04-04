@@ -64,8 +64,16 @@
 
     var demand_list = "[data-demand-list=\"ul\"]";
     var blackmail_title = "[data-blackmail-title=\"h2\"]";
+    var blackmail_from = "[data-blackmail-from=\"span\"]";
     var blackmail_towards = "[data-blackmail-to=\"span\"]";
     var blackmail_info = "[data-blackmail-info=\"div\"]";
+
+
+    //clear contents first
+    $(blackmail_title).empty();
+    $(blackmail_from).empty();
+    $(blackmail_towards).empty();
+    $(demand_list).empty();
 
     console.log(img_id);
     var query = "http://localhost:2403/blackmails?imgID=" + img_id;
@@ -84,7 +92,8 @@
 
 
       $(blackmail_title).append(result[0].name);
-      $(blackmail_towards).append(result[0].to);
+      $(blackmail_towards).append("<strong>To: </strong>" + result[0].to);
+      $(blackmail_from).append("<strong>From: </strong>" + result[0].from);
     });
 
     $(blackmail_info).show();
@@ -92,6 +101,7 @@
 
   var my_blackmails = "[data-my-blackmails=\"div\"]";
   var blackmails_tome = "[data-blackmails-tome=\"div\"]";
+  var public_blackmails = "[data-blackmails-public=\"div\"]";
 
   //generate blackmail html elements
   function blackmail_element(blackmail_arr, element_container) {
@@ -175,8 +185,11 @@
     App.LoggedInUser.get_my_blackmails(blackmail_element, my_blackmails);
   }
   if ($(blackmails_tome).length !== 0) {
-    console.log("sd");
     App.LoggedInUser.get_blackmails_tome(blackmail_element, blackmails_tome);
+  }
+  if ($(public_blackmails).length !== 0) {
+    App.get_all_blackmails(blackmail_element, public_blackmails);
+    console.log("sfsf");
   }
   App.LoggedInUser.get(load_html);
   window.App = App;

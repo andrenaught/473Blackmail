@@ -59,17 +59,20 @@
         //add the blackmails that matches the id to an array
         var my_blackmails = [];
         result.forEach(function(element) {
-          if (user.id == element.uploaderId) {
+          var from_and_to = element.subdir.split(" to ");
+
+         // console.log (from_and_to[0]);
+
+          if (user.username == from_and_to[0]) {
             if (element.subdir != "") {
               var file_path = "file_database/blackmails/" + element.subdir + "/" + element.filename;
             } else {
               var file_path = "file_database/blackmails/" + element.filename;
             }
 
-            var from_and_to = element.subdir.split(" to ");
+            
             var blackmail = {
               id: element.id,
-              uploaderId: element.uploaderId,
               from: from_and_to[0],
               to: from_and_to[1],
               path: file_path
@@ -80,6 +83,7 @@
 
 
           }
+          console.log(user.username +  " == " + from_and_to[0]);
         });
 
         //put that array in the callback function
@@ -140,6 +144,10 @@
         window.location.reload(); //refresh page
       }
     });
+  }
+
+  LoggedInUser.prototype.make_public = function(id, element) {
+   // post
   }
 
   //run it

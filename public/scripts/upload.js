@@ -47,7 +47,8 @@ var uploadFiles = function() {
         imgID: most_recent.id,
         name: most_recent.originalFilename,
         to: user_to_blackmail,
-        from: blackmailer
+        from: blackmailer,
+        public: 0
       };
 
       console.log(data);

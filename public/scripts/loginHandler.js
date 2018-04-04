@@ -58,6 +58,7 @@
         console.log(error);
         if (error.status == 401) {
           console.log("incorrect credentials");
+          alert("incorrect credentials");
         }
       }
     });
