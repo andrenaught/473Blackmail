@@ -41,3 +41,8 @@
 {
 	text-decoration: none;
 }
+
+.break-word {
+	width: 20em;
+	overflow-wrap: break-word;
+  }
