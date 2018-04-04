@@ -1,4 +1,4 @@
-# 473Blackmail
+# CPSC473 Blackmail Website
 Website is designed for the users to play funny blackmail games with other registered users by uploading incriminating photos of them and raising a list of demands.
 
 
