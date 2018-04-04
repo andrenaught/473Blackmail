@@ -59,24 +59,8 @@
 
         var my_blackmails = [];
         result.forEach(function(element) {
-<<<<<<< HEAD
-
           //add the blackmails that matches the id to an array
           if (user.username == element.from) {
-=======
-          var from_and_to = element.subdir.split(" to ");
-
-          // console.log (from_and_to[0]);
-
-          if (user.username == from_and_to[0]) {
-            if (element.subdir != "") {
-              var file_path = "file_database/blackmails/" + element.subdir + "/" + element.filename;
-            } else {
-              var file_path = "file_database/blackmails/" + element.filename;
-            }
-
-
->>>>>>> ab97d1c069bc29b89e0fcfcd1e49a6b15013951a
             var blackmail = {
               id: element.id,
               img_id: element.imgID,
@@ -90,10 +74,6 @@
 
             my_blackmails.push(blackmail);
           }
-<<<<<<< HEAD
-=======
-          console.log(user.username + " == " + from_and_to[0]);
->>>>>>> ab97d1c069bc29b89e0fcfcd1e49a6b15013951a
         });
 
         //put that array in the callback function
