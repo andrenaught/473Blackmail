@@ -54,7 +54,7 @@
     }, 500);
 
 
-  }
+  };
 
 
   App.display_img = display_img;
@@ -89,7 +89,7 @@
     });
 
     $(blackmail_info).show();
-  }
+  };
 
   var my_blackmails = "[data-my-blackmails=\"div\"]";
   var blackmails_tome = "[data-blackmails-tome=\"div\"]";

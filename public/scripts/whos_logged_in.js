@@ -34,18 +34,18 @@
       }
 
     });
-  }
+  };
 
   LoggedInUser.prototype.show_info = function() {
     this.get(function(user) {
       console.log(user);
     });
-  }
+  };
 
   LoggedInUser.prototype.set_info = function(user_info) {
     this.has_loaded = true;
     this.username = user_info.username;
-  }
+  };
 
 
   //return an array of file paths to the images
@@ -59,9 +59,24 @@
 
         var my_blackmails = [];
         result.forEach(function(element) {
+<<<<<<< HEAD
 
           //add the blackmails that matches the id to an array
           if (user.username == element.from) {
+=======
+          var from_and_to = element.subdir.split(" to ");
+
+          // console.log (from_and_to[0]);
+
+          if (user.username == from_and_to[0]) {
+            if (element.subdir != "") {
+              var file_path = "file_database/blackmails/" + element.subdir + "/" + element.filename;
+            } else {
+              var file_path = "file_database/blackmails/" + element.filename;
+            }
+
+
+>>>>>>> ab97d1c069bc29b89e0fcfcd1e49a6b15013951a
             var blackmail = {
               id: element.id,
               img_id: element.imgID,
@@ -75,13 +90,17 @@
 
             my_blackmails.push(blackmail);
           }
+<<<<<<< HEAD
+=======
+          console.log(user.username + " == " + from_and_to[0]);
+>>>>>>> ab97d1c069bc29b89e0fcfcd1e49a6b15013951a
         });
 
         //put that array in the callback function
         callback(my_blackmails, element_container);
       });
     });
-  }
+  };
 
 
   LoggedInUser.prototype.get_blackmails_tome = function(callback, element_container) {
@@ -116,7 +135,7 @@
         callback(blackmails_tome, element_container);
       });
     });
-  }
+  };
 
 
   LoggedInUser.prototype.delete_blackmail = function(img_id, blackmail_id) {
@@ -134,7 +153,8 @@
         type: "DELETE"
       });
     });
-  }
+  };
+
 
   LoggedInUser.prototype.make_public = function(id) {
    var update_query = "http://localhost:2403/blackmails/" + id;
@@ -145,6 +165,7 @@
     window.location.reload();
    });
   }
+
 
   //run it
   App.LoggedInUser = new LoggedInUser();

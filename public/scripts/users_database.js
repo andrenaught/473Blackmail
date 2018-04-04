@@ -12,7 +12,7 @@
     $.get(this.db_url).then(function(serverResponse) {
       callback(serverResponse);
     });
-  }
+  };
 
   //gets all users except for the one logged in
   Users.prototype.getOthers = function(callback) {
@@ -28,9 +28,9 @@
         }
 
         callback(users);
-      })
+      });
     });
-  }
+  };
 
   App.Users = new Users();
   window.App = App;
