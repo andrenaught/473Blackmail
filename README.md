@@ -33,7 +33,6 @@ npm install dpd-fileupload --save
 ```
 6. To run the project on localhost:2403
 ```
-cd 473Blackmail
 dpd -d
 ```
 
