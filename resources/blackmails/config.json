@@ -48,6 +48,14 @@
 			"required": true,
 			"id": "public",
 			"order": 5
+		},
+		"filename": {
+			"name": "filename",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "filename",
+			"order": 6
 		}
 	}
 }

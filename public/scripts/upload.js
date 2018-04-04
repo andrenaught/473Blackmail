@@ -30,6 +30,7 @@ var uploadFiles = function() {
   //get image ID then create a 'blackmails' row to put the data (ex. list of demands) about the image
   files.forEach(function(file) {
     var query = "http://localhost:2403/blackmailimgs?subdir=" + blackmailer + " to " + user_to_blackmail + "&originalFilename=" + file.name;
+
     $.get(query).then(function(result) {
 
       //we want to get the one we just uploaded
@@ -48,7 +49,8 @@ var uploadFiles = function() {
         name: most_recent.originalFilename,
         to: user_to_blackmail,
         from: blackmailer,
-        public: 0
+        public: 0,
+        filename: most_recent.filename,
       };
 
       console.log(data);

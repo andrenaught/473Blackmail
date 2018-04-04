@@ -53,37 +53,28 @@
 
     var get_logged_in = this.get;
 
-    $.get("http://localhost:2403/blackmailimgs/").then(function(result) {
+    $.get("http://localhost:2403/blackmails/").then(function(result) {
+
       get_logged_in(function(user) {
 
-        //add the blackmails that matches the id to an array
         var my_blackmails = [];
         result.forEach(function(element) {
-          var from_and_to = element.subdir.split(" to ");
 
-         // console.log (from_and_to[0]);
-
-          if (user.username == from_and_to[0]) {
-            if (element.subdir != "") {
-              var file_path = "file_database/blackmails/" + element.subdir + "/" + element.filename;
-            } else {
-              var file_path = "file_database/blackmails/" + element.filename;
-            }
-
-            
+          //add the blackmails that matches the id to an array
+          if (user.username == element.from) {
             var blackmail = {
               id: element.id,
-              from: from_and_to[0],
-              to: from_and_to[1],
-              path: file_path
+              img_id: element.imgID,
+              from: element.from,
+              to: element.to,
+              name: element.name,
+              public: element.public,
+              demands: element.demands,
+              file_name: element.filename,
             };
 
-
             my_blackmails.push(blackmail);
-
-
           }
-          console.log(user.username +  " == " + from_and_to[0]);
         });
 
         //put that array in the callback function
@@ -97,30 +88,24 @@
 
     var get_logged_in = this.get;
 
-    $.get("http://localhost:2403/blackmailimgs/").then(function(result) {
+    $.get("http://localhost:2403/blackmails/").then(function(result) {
+      
       get_logged_in(function(user) {
 
-        //add the blackmails that matches the id to an array
         var blackmails_tome = [];
         result.forEach(function(element) {
-          var from_and_to = element.subdir.split(" to ");
 
-          console.log(user.username + " == " + from_and_to[1]);
-
-          if (user.username == from_and_to[1]) {
-            if (element.subdir != "") {
-              var file_path = "file_database/blackmails/" + element.subdir + "/" + element.filename;
-            } else {
-              var file_path = "file_database/blackmails/" + element.filename;
-            }
-
-            var from_and_to = element.subdir.split(" to ");
+          //add the blackmails that matches the id to an array
+          if (user.username == element.to) {
             var blackmail = {
               id: element.id,
-              uploaderId: element.uploaderId,
-              from: from_and_to[0],
-              to: from_and_to[1],
-              path: file_path
+              img_id: element.imgID,
+              from: element.from,
+              to: element.to,
+              name: element.name,
+              public: element.public,
+              demands: element.demands,
+              file_name: element.filename,
             };
 
             blackmails_tome.push(blackmail);
@@ -134,20 +119,31 @@
   }
 
 
-  LoggedInUser.prototype.delete_blackmail = function(id, element) {
+  LoggedInUser.prototype.delete_blackmail = function(img_id, blackmail_id) {
 
-    dpd.blackmailimgs.del(id, function(result, err) {
+    //delete the file then delete the row from blackmails table
+    dpd.blackmailimgs.del(img_id, function(result, err) {
       if (err) {
         alert(err);
       } else {
         console.log(result);
         window.location.reload(); //refresh page
       }
+    }).then(function (){
+      $.ajax("http://localhost:2403/blackmails/" + blackmail_id, {
+        type: "DELETE"
+      });
     });
   }
 
-  LoggedInUser.prototype.make_public = function(id, element) {
-   // post
+  LoggedInUser.prototype.make_public = function(id) {
+   var update_query = "http://localhost:2403/blackmails/" + id;
+   var data = {public: 1};
+
+   $.post(update_query, data, function(serverResponse) {
+    console.log(serverResponse);
+    window.location.reload();
+   });
   }
 
   //run it

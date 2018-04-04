@@ -60,7 +60,7 @@
   App.display_img = display_img;
 
 
-  var get_blackmail_info = function(img_id) {
+  var get_blackmail_info = function(id) {
 
     var demand_list = "[data-demand-list=\"ul\"]";
     var blackmail_title = "[data-blackmail-title=\"h2\"]";
@@ -75,25 +75,17 @@
     $(blackmail_towards).empty();
     $(demand_list).empty();
 
-    console.log(img_id);
-    var query = "http://localhost:2403/blackmails?imgID=" + img_id;
-
-    console.log(query);
+    var query = "http://localhost:2403/blackmails/" + id;
     $.get(query).then(function(result) {
-      console.log(result[0]);
-
-
-      result[0].demands.forEach(function(val) {
+      result.demands.forEach(function(val) {
         var $demand_element = $("<li>" + val + "</li>");
         $(demand_list).append($demand_element);
-
-
       });
 
 
-      $(blackmail_title).append(result[0].name);
-      $(blackmail_towards).append("<strong>To: </strong>" + result[0].to);
-      $(blackmail_from).append("<strong>From: </strong>" + result[0].from);
+      $(blackmail_title).append(result.name);
+      $(blackmail_towards).append("<strong>To: </strong>" + result.to);
+      $(blackmail_from).append("<strong>From: </strong>" + result.from);
     });
 
     $(blackmail_info).show();
@@ -105,56 +97,65 @@
 
   //generate blackmail html elements
   function blackmail_element(blackmail_arr, element_container) {
+    console.log(blackmail_arr);
 
-    console.log(element_container);
     var displayed_img = "[data-displayed-img=\"img\"]";
 
-
     if (element_container == "[data-my-blackmails=\"div\"]") {
-      var can_delete = true
+      var can_delete = true;
+      var can_publicize = true;
     } else {
       var can_delete = false;
+      var can_publicize = false;
     }
 
+    console.log(JSON.stringify(blackmail_arr.length));
     if ($(element_container).length !== 0) {
       for (var i = 0; i < blackmail_arr.length; i++) {
 
+
+        console.log(blackmail_arr[i].file_name);
+        var file_path = "file_database/blackmails/" + blackmail_arr[i].from + " to " + blackmail_arr[i].to + "/" + blackmail_arr[i].file_name;
+        console.log(file_path);
         var $div = $("<div></div>");
 
-        var $info = $("<br><br><p class='blackmail_info'></p>");
+        var $info = $("<br><br><div class='blackmail_info'></div>");
         $info.append("<span>To: " + blackmail_arr[i].to + "</span>");
 
-
-
-
         var $img = $("<img>", {
-          src: blackmail_arr[i].path,
+          src: file_path,
           height: 100,
         });
 
-
-
         //"present" button
-        var show_func = "onclick='App.display_img(\"" + blackmail_arr[i].path + "\", \"" + blackmail_arr[i].id + "\")'";
-        var $show_button = $("<button " + show_func + ">Show</button>");
+        var show_func = "onclick='App.display_img(\"" + file_path + "\", \"" + blackmail_arr[i].id + "\")'";
+        var $show_button = $("<button class='btn btn-info'" + show_func + ">Show</button>");
         $info.append($show_button);
 
         var demand_list = "[data-demand-list=\"ul\"]";
 
 
-        //only allow deletes if its blackmails the logged in user made
-        if (can_delete) {
-          console.log(blackmail_arr[i].path);
-          var delete_func = "onclick='App.LoggedInUser.delete_blackmail(\"" + blackmail_arr[i].id + "\")'";
-          var $delete_button = $("<button class='btn btn-info' " + delete_func + ">delete</button>");
-          $info.append($delete_button);
+        //only allow to make it public if it hasnt been publicized yet
+        if (can_delete && blackmail_arr[i].public == 0) {
+          var publicize_func = "onclick='App.LoggedInUser.make_public(\"" + blackmail_arr[i].id + "\")'";
+          var $publicize_button = ("<button class='btn btn-warning' " + publicize_func + ">make it public</button>");
 
+          $info.append($publicize_button);
+        }
+        else if (blackmail_arr[i].public == 1){ 
+          $info.append("this is now public");
+        }
+
+        //only allow deletes if its blackmails the logged in user made and if its not yet publicized
+        if (can_delete && blackmail_arr[i].public == 0) {
+          var delete_func = "onclick='App.LoggedInUser.delete_blackmail(\"" + blackmail_arr[i].img_id + "\", \"" + blackmail_arr[i].id + "\")'";
+          var $delete_button = $("<button class='btn btn-danger' " + delete_func + ">delete</button>");
+          $info.append($delete_button);
         }
 
         $div.append($info);
         $div.append($img);
         $(element_container).append($div);
-
       }
     }
   }
