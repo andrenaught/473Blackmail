@@ -3,6 +3,7 @@ Website is designed for the users to play funny blackmail games with other regis
 
 
 IMPORTANT: don't use browser-sync, just put this address: http://localhost:2403/
+For now, tested on Google Chrome. 
 
 Adding in the database , should only need to do this initially
 
