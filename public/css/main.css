@@ -83,3 +83,16 @@
   border: 1px solid black;
   padding: 50px;
 }
+
+.navbar-default {
+  background-color: #9ca8c1;
+}
+
+.navbar-default a {
+    color: #555 !important;
+}
+
+.navbar-default .active a{
+  background-color: #303a4f !important;
+  color: #ccc !important;
+}
